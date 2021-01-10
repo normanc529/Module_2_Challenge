@@ -6,6 +6,7 @@ This is a command line application to match applicants with qualifying loans.
 Example:
     $ python app.py
 """
+import csv                  #added import csv to starter code
 import sys
 import fire
 import questionary
@@ -110,6 +111,24 @@ def save_qualifying_loans(qualifying_loans):
     """
     # @TODO: Complete the usability dialog for savings the CSV Files.
     # YOUR CODE HERE!
+
+#def save_csv():
+
+
+
+
+
+csvpath = Path("qualifying_loans.csv")                  #added csv output code to starter code here
+
+with open(csvpath, 'w', newline ='') as csvfile:
+
+    header = ["Lender", "Max Loan Amount", "Max LTV", "Max DTI", "Min Credit Score", "Interest Rate"]
+    csvwriter = csv.writer(csvfile, delimiter=",")
+    csvwriter.writerow(header)  #writes the header row in the csv file with the header list
+
+   
+
+
 
 
 def run():
