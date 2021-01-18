@@ -1,18 +1,32 @@
 # Project Title
 
-Just after the title, introduce your project by describing attractively what the project is about and what is the main problem that inspires you to create this project or what is the main contribution for the potential user of your project.
+Loan Qualifier Application - filters through csv files of prerequisite criteria from banks
+to determine if user has met criteria to apply for a loan.
 
 ---
 
 ## Technologies
 
-Describe the technologies required to use your project such as programming languages, libraries, frameworks, and operating systems. Be sure to include the specific versions of any critical dependencies that you have used in the stable version of your project.
+This program is made in Windows but will operate with any other system as long as file paths
+are properly directed using the Path in pathlib library module
+
+Technologies used are Python with the libraries:
+csv - imports csv and writing csv output
+sys - for debugging
+fire - making CLI interfaces
+questionary - applying custom user inputs into the fire CLI terminal inputs
+pathlib/Path - helps to find file paths to read csv files from and write csv files to
 
 ---
 
 ## Installation Guide
 
-In this section, you should include detailed installation notes containing code blocks and screenshots.
+python anaconda will have most of the libraries and dependencies to import:
+import csv                  
+import sys
+import fire
+import questionary
+from pathlib import Path
 
 ---
 

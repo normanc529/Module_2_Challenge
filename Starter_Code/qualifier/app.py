@@ -6,7 +6,7 @@ This is a command line application to match applicants with qualifying loans.
 Example:
     $ python app.py
 """
-import csv                  #added import csv to starter code
+import csv                  #added import csv to starter code to read and write csv files
 import sys
 import fire
 import questionary
@@ -99,7 +99,7 @@ def find_qualifying_loans(bank_data, credit_score, debt, income, loan, home_valu
     bank_data_filtered = filter_loan_to_value(loan_to_value_ratio, bank_data_filtered)
 
     print(f"Found {len(bank_data_filtered)} qualifying loans")
-
+    #print(bank_data_filtered)
     return bank_data_filtered
 
 
@@ -111,25 +111,35 @@ def save_qualifying_loans(qualifying_loans):
     """
     # @TODO: Complete the usability dialog for savings the CSV Files.
     # YOUR CODE HERE!
+    response = questionary.confirm("would you like to save the csv to a new sheet?").ask()  #after inputing CLI questionary items, ask to save csv, if true/y, move to next argument
+    if response == True:
 
-#def save_csv():
+        csv_output_path = questionary.text("Where would you like to save the file?").ask()  #after selecting true/y, ask for CLI input of the file path to output the newly generated csvfile
+        save_csv(qualifying_loans, csv_output_path)
+
+    
+    
+# csvpath_read = Path('C:/Users/Norman/desktop/github_upload/module_2_challenge/Starter_Code/qualifier/data/daily_rate_sheet.csv')  absolute path
+
+# csvpath_read = Path('./Starter_Code/qualifier/data/daily_rate_sheet.csv')               <----    use this one                     relative path
 
 
 
+def save_csv(qualifying_loans, csv_output_path):
+    #csvpath_write = Path('./qualifying_loans.csv')         this is the output path that i want to copy into the CLI file output path or wherever you want to put it
 
 
-csvpath = Path("qualifying_loans.csv")                  #added csv output code to starter code here
-
-with open(csvpath, 'w', newline ='') as csvfile:
-
-    header = ["Lender", "Max Loan Amount", "Max LTV", "Max DTI", "Min Credit Score", "Interest Rate"]
-    csvwriter = csv.writer(csvfile, delimiter=",")
-    csvwriter.writerow(header)  #writes the header row in the csv file with the header list
-
+    with open(csv_output_path, 'w', newline ='') as csvfile:
+        
+        header = ["Lender", "Max Loan Amount", "Max LTV", "Max DTI", "Min Credit Score", "Interest Rate"]
+        
+        csvwriter = csv.writer(csvfile, delimiter=",")
+        csvwriter.writerow(header)  #writes the header row in the csv file with the header list
+        
+        for loan in qualifying_loans:
+            #print(loan)                checks if loan(s) appear in the program so i can print it into the csv on the next line
+            csvwriter.writerow(loan)    
    
-
-
-
 
 def run():
     """The main function for running the script."""
